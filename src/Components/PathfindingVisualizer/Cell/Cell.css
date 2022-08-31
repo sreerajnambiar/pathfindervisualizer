@@ -1,0 +1,24 @@
+.cell{
+    width:20px;
+    height:20px;
+    border: 1px solid teal ;
+}
+.cell:hover{
+    background-color: burlywood;
+}
+/* Difining state classes */
+
+.blockedcell{
+    background-color: grey;
+}
+
+.startcell{
+    background-color: royalblue;
+}
+
+.endcell{
+    background-color: red;
+}
+.node-visited{
+    background-color: yellow;
+}

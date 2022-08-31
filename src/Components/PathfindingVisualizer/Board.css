@@ -1,0 +1,7 @@
+.row{
+    display: flex;
+    flex-direction: row;
+}
+#board{
+    border: 1px solid teal;
+}
