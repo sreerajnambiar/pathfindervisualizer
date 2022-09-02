@@ -33,7 +33,6 @@ class Board extends Component {
     window.addEventListener("resize", this.updateDimention);
     this.makeGrid();
   }
-
   //state Altering functions
   setStartAndEndCell = (row, col, type) => {
     const { Grid, startCell, endCell } = this.state;
@@ -153,8 +152,6 @@ class Board extends Component {
   };
 
   render() {
-    console.log(this.state);
-
     let { Grid } = this.state;
     return (
       <>
@@ -169,7 +166,7 @@ class Board extends Component {
                 display: { xs: "none", sm: "block" },
               }}
             >
-              PATHFINDER VISUALISER
+              PATHFINDER VISUALIZER
             </Typography>
             <IconButton
               size="large"

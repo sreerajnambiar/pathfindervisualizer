@@ -4,7 +4,7 @@
     border: 1px solid teal ;
 }
 .cell:hover{
-    background-color: burlywood;
+    background-color: lightcyan;
 }
 /* Difining state classes */
 
