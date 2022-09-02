@@ -1,7 +1,7 @@
+/* eslint-disable */
 import React, { Component } from "react";
 import Cell from "./Cell/Cell";
 import "./Board.css";
-import Button from "@mui/material/Button";
 import {
   visulaizeAstar,
   getNodesInShortestPathOrderAstar,
@@ -35,7 +35,7 @@ class Board extends Component {
   }
   //state Altering functions
   setStartAndEndCell = (row, col, type) => {
-    const { Grid, startCell, endCell } = this.state;
+    const { Grid, startCell,  } = this.state;
     let newGrid = Grid;
     let newCell = newGrid[row][col];
     if (type === "start" || "end") {
