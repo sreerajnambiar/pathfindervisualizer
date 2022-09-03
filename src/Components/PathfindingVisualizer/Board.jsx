@@ -35,14 +35,13 @@ class Board extends Component {
   }
   //state Altering functions
   setStartAndEndCell = (row, col, type) => {
-    const { Grid, startCell,  } = this.state;
+    const { Grid, startCell, endCell } = this.state;
     let newGrid = Grid;
     let newCell = newGrid[row][col];
-    if (type === "start" || "end") {
+   
       if (type === "start") {
         if (startCell) {
           if (startCell.col === newCell.col && startCell.row === newCell.row) {
-            //snack bar
             return;
           } else {
             startCell.isStart = false;
@@ -55,14 +54,21 @@ class Board extends Component {
         newGrid[row][col] = newCell;
         this.setState({ Grid: newGrid, startCell: newCell });
       } else if (type === "end") {
+        if(endCell){
+          if (endCell.col === newCell.col && endCell.row === newCell.row) {
+            return;
+          } else {
+            endCell.isEnd = false;
+            newGrid[endCell.row][endCell.col] = endCell;
+          }
+        }
         newCell.isEnd = !newCell.isEnd;
         newGrid[row][col] = newCell;
-
         newCell.isBlocked = false;
         newCell.isStart = false;
         this.setState({ Grid: newGrid, endCell: newCell });
       }
-    }
+    
   };
 
   setblockedCell = (row, col) => {

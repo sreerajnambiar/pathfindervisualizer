@@ -14,7 +14,7 @@ export default class Cell extends Component {
   handleClick() {
     const { setStartAndEndCell, row, col } = this.props;
     var timeoutID = null;
-    let delay = 1000;
+    let delay = 250;
     return function () {
       if (!timeoutID) {
         timeoutID = setTimeout(function () {
