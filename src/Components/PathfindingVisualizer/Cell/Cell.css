@@ -3,9 +3,9 @@
     height:20px;
     border: 1px solid teal ;
 }
-.cell:hover{
+/* .cell:hover{
     background-color: lightcyan;
-}
+} */
 /* Difining state classes */
 
 .blockedcell{

@@ -11,7 +11,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-// import _ from 'lodash'
+import CleaningServicesOutlinedIcon from '@mui/icons-material/CleaningServicesOutlined';
+import RouteIcon from '@mui/icons-material/Route';
 
 class Board extends Component {
   constructor(props) {
@@ -82,7 +83,7 @@ class Board extends Component {
     });
   };
 
-  makeGrid() {
+  makeGrid = async () =>  {
     let rows = [];
     const { numRows, numColumns } = this.state;
     for (let i = 0; i < numRows; i++) {
@@ -92,7 +93,7 @@ class Board extends Component {
       }
       rows.push(cols);
     }
-    this.setState({ Grid: rows });
+    await this.setState({ Grid: rows } );
   }
 
   createCell = (row, col) => {
@@ -109,12 +110,52 @@ class Board extends Component {
     };
   };
 
+  resetCell = (cell) => {
+    cell.isBlocked= null
+    cell.previous= null
+    cell.f= 0
+    cell.g= 0
+    cell.h= 0
+    return cell
+  };
+
   visulizeAstar = () => {
     const { Grid, startCell, endCell } = this.state;
     var ret = visulaizeAstar(Grid, startCell, endCell);
     var path = getNodesInShortestPathOrderAstar(ret[ret.length - 1]);
     this.animateAlgorithm(path);
   };
+
+  createMaze = () =>{
+    console.log("create maze clicked ")
+  }
+
+  resetBlocks = () =>{
+    console.log("insres")
+    let {Grid} = this.state
+    let rows = [];
+    const { numRows, numColumns } = this.state;
+    for (let i = 0; i < numRows; i++) {
+      let cols = [];
+      for (let j = 0; j < numColumns; j++) {
+        cols.push(this.resetCell(Grid[i][j]));
+      }
+      rows.push(cols);
+    }
+    this.setState({ Grid: rows } , () => {
+      this.resetPath();
+    });
+    
+  }
+
+  resetPath = () =>{
+    const  {Grid} = this.state
+    for (let i = 0; i <= Grid.length - 1; i++) {
+      for (let j = 0; j <= Grid[i].length - 1; j++) {
+      document.getElementById(`node-${Grid[i][j].row}-${Grid[i][j].col}`).classList.remove("node-visited");
+    }
+  }
+  }
 
   animateAlgorithm = (nodesInShortestPathOrder) => {
     nodesInShortestPathOrder.shift();
@@ -130,22 +171,27 @@ class Board extends Component {
     let numRows = Math.floor(30);
     let numColumns = 0;
     if (width > 1500) {
+      numRows = 30;
       numColumns = 60;
     } else if (width > 1250) {
       numRows = 30;
       numColumns = 40;
     } else if (width > 1000) {
-      numColumns = 10;
-      numRows = 15;
+      numColumns = 30;
+      numRows = 30;
     } else if (width > 750) {
-      numColumns = 10;
-      numRows = 15;
-    } else if (width > 500) {
-      numColumns = 10;
-      numRows = 15;
+      numColumns = 30;
+      numRows = 30;
+    }else if (width > 500) {
+      numColumns = 18;
+      numRows = 26;
+    }
+    else if (width > 400) {
+      numColumns = 16;
+      numRows = 32;
     } else if (width > 250) {
-      numColumns = 10;
-      numRows = 15;
+      numColumns = 14;
+      numRows = 28;
     } else if (width > 0) {
       numColumns = 0;
     }
@@ -174,6 +220,26 @@ class Board extends Component {
             >
               PATHFINDER VISUALIZER
             </Typography>
+                        <IconButton
+              size="large"
+              edge="end"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={this.createMaze}
+            >
+              <RouteIcon />
+            </IconButton>
+            <IconButton
+              size="large"
+              edge="end"
+              color="inherit"
+              aria-label="menu"
+              sx={{ mr: 2 }}
+              onClick={this.resetBlocks}
+            >
+              <CleaningServicesOutlinedIcon />
+            </IconButton>
             <IconButton
               size="large"
               edge="end"
@@ -184,6 +250,8 @@ class Board extends Component {
             >
               <PlayArrowIcon />
             </IconButton>
+
+            
           </Toolbar>
         </AppBar>
 
@@ -211,6 +279,7 @@ class Board extends Component {
               );
             })}
           </div>
+        
         </div>
       </>
     );

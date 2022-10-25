@@ -18,7 +18,7 @@ export default class Cell extends Component {
     return function () {
       if (!timeoutID) {
         timeoutID = setTimeout(function () {
-          console.log("clicked");
+          // console.log("clicked");
           setStartAndEndCell(row, col, "start");
           timeoutID = null;
         }, delay);

@@ -1,7 +1,7 @@
 import { eucledianDistance } from './distancefunctions'
 import _ from 'lodash'
-export const visulaizeAstar = (Grid, startCell, endCell) => {
 
+export const visulaizeAstar = (Grid, startCell, endCell) => {
    let closedSet = []
    let openSet = []
    startCell.g = 0
@@ -50,7 +50,6 @@ export const visulaizeAstar = (Grid, startCell, endCell) => {
       closedSet.push(current)
    }
 }
-
 
 const getNeighbours = (cell, Grid) => {
    let neighbours = []
