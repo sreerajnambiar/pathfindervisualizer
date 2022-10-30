@@ -16,4 +16,4 @@ const ManhattenDistance = (point1, point2 ) =>{
     return distance
 }
 
-export {eucledianDistance};
+export {eucledianDistance , ManhattenDistance};

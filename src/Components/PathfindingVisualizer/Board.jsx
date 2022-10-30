@@ -6,6 +6,7 @@ import {
   visulaizeAstar,
   getNodesInShortestPathOrderAstar,
 } from "./Algrithms/Astaalgo";
+import { getRdfsMaze } from "./MazeGenerator/Rdfs";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -13,6 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import CleaningServicesOutlinedIcon from '@mui/icons-material/CleaningServicesOutlined';
 import RouteIcon from '@mui/icons-material/Route';
+
 
 class Board extends Component {
   constructor(props) {
@@ -30,6 +32,7 @@ class Board extends Component {
   componentWillMount() {
     this.updateDimention();
   }
+
   componentDidMount() {
     window.addEventListener("resize", this.updateDimention);
     this.makeGrid();
@@ -128,6 +131,10 @@ class Board extends Component {
 
   createMaze = () =>{
     console.log("create maze clicked ")
+    const {Grid} = this.state
+    let NewMazeGrid = getRdfsMaze(Grid)
+    console.log(NewMazeGrid)
+    this.setState({Grid:NewMazeGrid})
   }
 
   resetBlocks = () =>{
